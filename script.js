@@ -31,7 +31,7 @@ Book.prototype.getHTML = function(index) {
         <p class="book-author">${this.author}</p>
         <p class="book-pages">${this.pages} pages</p>
         <div class="book-icons">
-            <object class="book-read-toggle" data="${icon}" width="30" height="30"></object>
+            <button class="book-read-toggle"><object data="${icon}" width="30" height="30"></object></button>
             <object data="./book-minus-outline.svg" width="30" height="30"></object>
         </div>
         <button class="delete">Delete</button>
@@ -47,14 +47,6 @@ const lostTime = new Book ('In Search of Lost Time', 'Marcel Proust', 468);
 const warAndPeace = new Book ('War and Peace', 'Leon Tolstoï', 1296);
 
 
-// console.log(book);
-// console.log(book.getInfo());
-
-// console.log('Reading the book...');
-// book.toggleRead();
-// console.log(book);
-// console.log(book.getInfo());
-// console.log(myLibrary);
 
 // -------------------------------------------
 // ------------- DOM -------------------------
@@ -72,13 +64,23 @@ const refreshLibrary = () => {
         body.insertAdjacentHTML('beforeend', el.getHTML(index));
     });
 
-    const delz = document.querySelectorAll('.delete');
-    delz.forEach(el => {
+
+    // CHANGE READ STATUS OF A BOOK
+    const books = document.querySelectorAll('.book-read-toggle');
+    books.forEach(el => {
+        console.log(el);
+        el.addEventListener('click', () => {
+            myLibrary[Number(el.getAttribute('id'))].toggleRead();
+            refreshLibrary(); 
+        });
+    })
+
+    // DELETE A BOOK
+    const delBtns = document.querySelectorAll('.delete');
+    delBtns.forEach(el => {
         el.addEventListener('click', function() {
-        //    console.log(myLibrary);
         myLibrary.splice(Number(el.parentElement.getAttribute('id')), 1);
-        refreshLibrary()
-        //    console.log(myLibrary);  
+        refreshLibrary()  
         })
     })
 }

@@ -31,7 +31,7 @@ Book.prototype.getHTML = function(index) {
         <p class="book-pages">${this.pages} pages</p>
         <div class="book-icons">          
             <img title="${title}" class="book-read-toggle" src="${icon}" alt="read-status"/>
-            <img title="Delete book" class="delete" src="book-minus-outline.png" alt="delete-icon"/> 
+            <img title="Delete book" class="delete" src="delete-outline.png" alt="delete-icon"/> 
         </div>
     </div> 
     `;
@@ -87,17 +87,22 @@ showFormBtn.addEventListener('click', () => {
 submitBookBtn.addEventListener('click', (e) => {
     e.preventDefault();
     // In order to check form even if default prevented
-    document.forms[0].reportValidity() // Well, magic number is bad practice but I'm working on a single form
+    if (!document.forms[0].reportValidity()) { // Well, magic number is bad practice but I'm working on a single form
+        alert('Please enter informations for all the input fields of the book');
+    }
+    else{
+        const book = new Book(
+            document.getElementsByName('book-title')[0].value,
+            document.getElementsByName('book-author')[0].value,
+            document.getElementsByName('book-pages')[0].value,
+            document.getElementsByName('book-is-read')[0].checked
+        );
+    }
     
-    const book = new Book(
-        document.getElementsByName('book-title')[0].value,
-        document.getElementsByName('book-author')[0].value,
-        document.getElementsByName('book-pages')[0].value,
-        document.getElementsByName('book-is-read')[0].checked
-    );
-
-
-
+    document.getElementsByName('book-title')[0].value  = '';
+    document.getElementsByName('book-author')[0].value = ''; 
+    document.getElementsByName('book-pages')[0].value  = '';
+    document.getElementsByName('book-is-read')[0].checked = false;
     refreshLibrary();
 
     // Closing form or adding another book

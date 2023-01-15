@@ -38,18 +38,20 @@
 
          <!-- Hidden add book form -->
         <form action="#" class="form-add hidden">
-            <label for="book-title">Title : </label>
+            
+            <label for="book-title">Title </label>
             <input required type="text" id="book-title" name="book-title">
-
-            <label for="book-author">Author : </label>
+            
+            <label for="book-author">Author </label>
             <input required type="text" id="book-author" name="book-author">
 
-            <label for="book-pages">Number of pages : </label>
+            <label for="book-pages">Number of pages </label>
             <input required type="number" name="book-pages" id="book-pages">
             
-            
-            <label for="book-read">Check if you read this book.</label>
-            <input type="checkbox" name="book-is-read" id="book-read">
+            <div>
+                <label for="book-read">Check if you read this book.</label>
+                <input type="checkbox" name="book-is-read" id="book-read">
+            </div>
             
             <input type="submit" value="Add Book" class="submitBookBtn">
             <input type="button" value="Cancel" class="cancelAddBtn">

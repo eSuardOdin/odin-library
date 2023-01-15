@@ -5,42 +5,58 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="style.css">
+    <link rel="shortcut icon" href="./book-outline.png" type="image/x-icon">
     <title>Library</title>
+
+
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@100&family=Poppins:wght@100;200&family=Ultra&display=swap" rel="stylesheet">
 </head>
 <body>
+
+   
+
+    <!-- Page -->
     <div class="container">
         
         <div class="header">
+            <div>
+                <img class="title-img" src="./bookshelf.png" alt="bookshelf">
+                <p class="title">Library Project</p>
+            </div>
             <button class="showFormBtn">Add a book</button>
         </div>
 
         <div class="body">
-            <div class="bookshelf"></div>
+            <div class="bookshelf">
 
-
-
-            <form action="#" class="form-add hidden">
-                <label for="book-title">Title : </label>
-                <input required type="text" id="book-title" name="book-title">
-
-                <label for="book-author">Author : </label>
-                <input required type="text" id="book-author" name="book-author">
-
-                <label for="book-pages">Number of pages : </label>
-                <input required type="number" name="book-pages" id="book-pages">
-                <div>
-                    <p>Did you read this book ? </p>
-                    <label for="book-read">Yes</label>
-                    <input type="radio" name="book-is-read" id="book-read" value="true">
-                    <label for="book-not-read">No</label>
-                    <input type="radio" name="book-is-read" id="book-not-read" value="false">
-                </div>
-                <input type="submit" value="Add Book" class="submitBookBtn">
-
-            </form>
+            </div>
         </div>
 
+
+         <!-- Hidden add book form -->
+        <form action="#" class="form-add hidden">
+            <label for="book-title">Title : </label>
+            <input required type="text" id="book-title" name="book-title">
+
+            <label for="book-author">Author : </label>
+            <input required type="text" id="book-author" name="book-author">
+
+            <label for="book-pages">Number of pages : </label>
+            <input required type="number" name="book-pages" id="book-pages">
+            
+            
+            <label for="book-read">Check if you read this book.</label>
+            <input type="checkbox" name="book-is-read" id="book-read">
+            
+            <input type="submit" value="Add Book" class="submitBookBtn">
+            <input type="button" value="Cancel" class="cancelAddBtn">
+        </form>
     </div>
+
+
 
 
     <script src="./script.js"></script>

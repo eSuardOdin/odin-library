@@ -6,16 +6,49 @@
 .container {
     display: grid;
     grid-template-rows: 200px 1fr;
+    height: 100vh;
 }
 
 .header {
     grid-row: 1/2;
-    box-shadow: 0px 5px 5px 0px #727a7a;
+    box-shadow: 0px 5px 5px 0px #272727;
 }
 
 .body {
-    background-color: #747070;
+    padding: 20px;
+    background-color: #949494;
     grid-row: 2/3;
+    display: flex; 
+    justify-content: center;
+    flex-wrap: wrap;
+    gap: 1vw;
+}
+
+.book-container {
+    background-color: white;
+    height: clamp(250px, 20vh, 500px);
+    width: clamp(100px, 10vw, 300px);
+    padding: 20px;
+    border-radius: 10%;
+    box-shadow: 0px 5px 5px 0px #272727;
+    display: grid;
+    grid-column: 1fr;
+    grid-row: repeat(4, 1fr);
+}
+.book-title {
+    font-size: 1.3rem;
+    font-weight: 700;
+    grid-row: 1/2;
+}
+
+.book-author {
+    font-style: italic;
+    grid-row: 2/3;
+}
+.book-icons{
     display: flex;
+    align-items: flex-end;
+    gap: 25px;
+    grid-row: 4/5;
 }
 

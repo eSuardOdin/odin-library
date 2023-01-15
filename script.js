@@ -40,6 +40,13 @@ Book.prototype.getHTML = function(index) {
     return res;
 }
 
+
+
+const addBook = (title, author, pages, isRead) => {
+    const book = new Book(title, author, pages, isRead);
+    refreshLibrary();
+}
+
 const dune = new Book('Dune', 'Frank Herbert', 894, true);
 const hobbit = new Book('The Hobbit', 'J.R.R Tolkien', 368, true);
 const bigBrother = new Book ('1984', 'George Orwell', 396, true);
@@ -51,19 +58,33 @@ const warAndPeace = new Book ('War and Peace', 'Leon Tolstoï', 1296);
 // -------------------------------------------
 // ------------- DOM -------------------------
 // -------------------------------------------
-const body = document.querySelector('.body');
+const bookshelf = document.querySelector('.bookshelf');
+const addBtn = document.querySelector('.addBtn');
+const form = document.querySelector('.form-add');
 
 
+// ---------------------------
+// Show the add book form
+// ---------------------------
+const toggleForm = () => {
+    console.log('Hidding');
+    form.classList.toggle('hidden');
+    bookshelf.classList.toggle('blurred');
+};
 
-
+addBtn.addEventListener('click', () => {
+    toggleForm();
+})
+// ---------------------------
+// Refresh the Library layout
+// ---------------------------
 
 const refreshLibrary = () => {
-    body.innerHTML = '';
+    bookshelf.innerHTML = '';
     myLibrary.forEach((el, index) => {
         const icon = el.isRead ? './book-check.svg' : './book-clock-outline.svg';
-        body.insertAdjacentHTML('beforeend', el.getHTML(index));
+        bookshelf.insertAdjacentHTML('beforeend', el.getHTML(index));
     });
-
 
     // CHANGE READ STATUS OF A BOOK
     const books = document.querySelectorAll('.book-read-toggle');
@@ -80,11 +101,14 @@ const refreshLibrary = () => {
     const delBtns = document.querySelectorAll('.delete');
     delBtns.forEach(el => {
         el.addEventListener('click', function() {
-        myLibrary.splice(Number(el.parentElement.getAttribute('id')), 1);
-        refreshLibrary()  
+            // console.log(`${myLibrary[Number(el.parentElement.parentElement.getAttribute('id'))].title}`);
+        myLibrary.splice(Number(el.parentElement.parentElement.getAttribute('id')), 1);
+        refreshLibrary();  
+        //     console.log(myLibrary);
         })
     })
 }
 
 refreshLibrary();
-
+console.log(myLibrary);
+addBook('Toto to the beach', 'Tutu', 143, false);

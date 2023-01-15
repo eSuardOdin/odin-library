@@ -23,15 +23,24 @@ Book.prototype.toggleRead = function() {
 Book.prototype.getHTML = function(index) {
     const icon = this.isRead  ? './book-check.png' : './book-clock-outline.png';
     const title = this.isRead ? 'Book read' : 'Not read yet';
+    const className = this.isRead ? 'read-icon' : 'not-read-icon';
     const res = 
     `
     <div id="${index}" class="book-container">
         <p class="book-title">${this.title}</p>
         <p class="book-author">${this.author}</p>
         <p class="book-pages">${this.pages} pages</p>
-        <div class="book-icons">          
-            <img title="${title}" class="book-read-toggle" src="${icon}" alt="read-status"/>
-            <img title="Delete book" class="delete" src="delete-outline.png" alt="delete-icon"/> 
+        <div class="book-icons">
+            
+            <div class="${className}">
+                <img title="${title}" class="book-read-toggle" src="${icon}" alt="read-status"/>
+                <p class="read-status">${title}</p>          
+            </div>
+            
+            <div>
+                <img title="Delete book" class="delete" src="delete-outline.png" alt="delete-icon"/>
+                <p class="del-book">Delete</p>          
+            </div> 
         </div>
     </div> 
     `;
@@ -39,17 +48,16 @@ Book.prototype.getHTML = function(index) {
 }
 
 
-
 const addBook = (title, author, pages, isRead) => {
     const book = new Book(title, author, pages, isRead);
     refreshLibrary();
 }
 
-// const dune = new Book('Dune', 'Frank Herbert', 894, true);
-// const hobbit = new Book('The Hobbit', 'J.R.R Tolkien', 368, true);
-// const bigBrother = new Book ('1984', 'George Orwell', 396, true);
-// const lostTime = new Book ('In Search of Lost Time', 'Marcel Proust', 468);
-// const warAndPeace = new Book ('War and Peace', 'Leon Tolstoï', 1296);
+const dune = new Book('Dune', 'Frank Herbert', 894, true);
+const hobbit = new Book('The Hobbit', 'J.R.R Tolkien', 368, true);
+const warAndPeace = new Book ('War and Peace', 'Leon Tolstoï', 1296);
+const bigBrother = new Book ('1984', 'George Orwell', 396, true);
+const lostTime = new Book ('In Search of Lost Time', 'Marcel Proust', 468);
 
 
 
@@ -140,7 +148,7 @@ const refreshLibrary = () => {
     const books = document.querySelectorAll('.book-read-toggle');
     books.forEach(el => {
         el.addEventListener('click', () => {
-            const bookID = Number(el.parentElement.parentElement.getAttribute('id'));
+            const bookID = Number(el.parentElement.parentElement.parentElement.getAttribute('id'));
             myLibrary[bookID].toggleRead();
             refreshLibrary(); 
         });
@@ -150,7 +158,7 @@ const refreshLibrary = () => {
     const delBtns = document.querySelectorAll('.delete');
     delBtns.forEach(el => {
         el.addEventListener('click', function() {
-        myLibrary.splice(Number(el.parentElement.parentElement.getAttribute('id')), 1);
+        myLibrary.splice(Number(el.parentElement.parentElement.parentElement.getAttribute('id')), 1);
         refreshLibrary();  
         })
     })

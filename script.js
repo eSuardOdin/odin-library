@@ -9,7 +9,6 @@ function Book(title, author, pages, isRead = false){
 }
 
 
-// Pour ne pas qu'une nouvelle instance de la fonction soit créée à chaque nouvel objet, on la définit dans le prototype :
 Book.prototype.getInfo = function() 
 {
     return this.isRead ? 
@@ -19,22 +18,23 @@ Book.prototype.getInfo = function()
 
 Book.prototype.toggleRead = function() {
     this.isRead = (!this.isRead);
-    console.log(this);
+    // console.log(this);
 }
 
 Book.prototype.getHTML = function(index) {
-    const icon = this.isRead ? './book-check.svg' : './book-clock-outline.svg';
+    // const icon = this.isRead ? './book-check.svg' : './book-clock-outline.svg';
+    const icon = this.isRead  ? './book-check.png' : './book-clock-outline.png';
+    const title = this.isRead ? 'Book read' : 'Not read yet';
     const res = 
     `
     <div id="${index}" class="book-container">
         <p class="book-title">${this.title}</p>
         <p class="book-author">${this.author}</p>
         <p class="book-pages">${this.pages} pages</p>
-        <div class="book-icons">
-            <button class="book-read-toggle"><object data="${icon}" width="30" height="30"></object></button>
-            <object data="./book-minus-outline.svg" width="30" height="30"></object>
+        <div class="book-icons">          
+            <img title="${title}" class="book-read-toggle" src="${icon}" alt="read-status"/>
+            <img title="Delete book" class="delete" src="book-minus-outline.png" alt="delete-icon"/> 
         </div>
-        <button class="delete">Delete</button>
     </div> 
     `;
     return res;
@@ -68,9 +68,10 @@ const refreshLibrary = () => {
     // CHANGE READ STATUS OF A BOOK
     const books = document.querySelectorAll('.book-read-toggle');
     books.forEach(el => {
-        console.log(el);
+        // console.log(el);
         el.addEventListener('click', () => {
-            myLibrary[Number(el.getAttribute('id'))].toggleRead();
+            const bookID = Number(el.parentElement.parentElement.getAttribute('id'));
+            myLibrary[bookID].toggleRead();
             refreshLibrary(); 
         });
     })

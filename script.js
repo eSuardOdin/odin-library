@@ -59,9 +59,9 @@ const warAndPeace = new Book ('War and Peace', 'Leon Tolstoï', 1296);
 // ------------- DOM -------------------------
 // -------------------------------------------
 const bookshelf = document.querySelector('.bookshelf');
-const addBtn = document.querySelector('.addBtn');
+const showFormBtn = document.querySelector('.showFormBtn');
 const form = document.querySelector('.form-add');
-
+const submitBookBtn = document.querySelector('.submitBookBtn');
 
 // ---------------------------
 // Show the add book form
@@ -72,9 +72,32 @@ const toggleForm = () => {
     bookshelf.classList.toggle('blurred');
 };
 
-addBtn.addEventListener('click', () => {
+showFormBtn.addEventListener('click', () => {
     toggleForm();
 })
+
+
+
+
+
+// ---------------------------
+// Add a book
+// ---------------------------
+submitBookBtn.addEventListener('click', (e) => {
+    e.preventDefault();
+    // In order to check form even if default prevented
+    document.forms[0].reportValidity() // Well, magic number is bad practice but I'm working on a single form 
+    
+    const book = new Book(
+        document.getElementsByName('book-title')[0].value,
+        document.getElementsByName('book-author')[0].value,
+        document.getElementsByName('book-pages')[0].value,
+        document.getElementsByName('book-is-read')[0].value
+    );
+    console.log(book);
+    refreshLibrary();
+})
+
 // ---------------------------
 // Refresh the Library layout
 // ---------------------------
@@ -108,6 +131,8 @@ const refreshLibrary = () => {
         })
     })
 }
+
+
 
 refreshLibrary();
 console.log(myLibrary);

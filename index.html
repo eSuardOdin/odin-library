@@ -11,7 +11,7 @@
     <div class="container">
         
         <div class="header">
-            <button class="addBtn">Add a book</button>
+            <button class="showFormBtn">Add a book</button>
         </div>
 
         <div class="body">
@@ -20,8 +20,23 @@
 
 
             <form action="#" class="form-add hidden">
-                <label for="book-title">Title</label>
-                <input type="text" id="book-title" name="book-title">
+                <label for="book-title">Title : </label>
+                <input required type="text" id="book-title" name="book-title">
+
+                <label for="book-author">Author : </label>
+                <input required type="text" id="book-author" name="book-author">
+
+                <label for="book-pages">Number of pages : </label>
+                <input required type="number" name="book-pages" id="book-pages">
+                <div>
+                    <p>Did you read this book ? </p>
+                    <label for="book-read">Yes</label>
+                    <input type="radio" name="book-is-read" id="book-read" value="true">
+                    <label for="book-not-read">No</label>
+                    <input type="radio" name="book-is-read" id="book-not-read" value="false">
+                </div>
+                <input type="submit" value="Add Book" class="submitBookBtn">
+
             </form>
         </div>
 
